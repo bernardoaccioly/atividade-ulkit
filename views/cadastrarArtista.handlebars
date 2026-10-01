@@ -1,0 +1,49 @@
+<h1>Cadastrar Artista</h1>
+
+<form action="/artistas" method="POST">
+
+  <div>
+    <label>Nome do Artista:</label>
+    <input type="text" name="nome">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Ano de Nascimento:</label>
+    <input type="number" name="anoNascimento">
+  </div>
+
+  <br>
+  <div>
+    <label>Nome artístico:</label>
+    <input type="text" name="nomeArtistico"> 
+  </div>
+
+  <br>
+
+  <div>
+    <label>Em atividade?</label>
+    <input type="checkbox" name="emAtividade">
+  </div>
+  <br>
+
+  <div>
+    <label>Foto:</label>
+    <input type="text" name="foto">
+  </div>
+
+  <div>
+    <label>Filmes:</label>
+    <select name="filmes" multiple>
+      {{#each filmes}}
+        <option value="{{this.id}}">{{this.nome}}</option>
+      {{/each}} 
+      </select>
+  </div>
+
+  <button type="submit">
+    Cadastrar
+  </button>
+
+</form>

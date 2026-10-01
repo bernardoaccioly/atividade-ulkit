@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<h1>Lista de Artistas</h1>
+
+<a href="/">
+  Inicial
+</a><br>
+
+<a href="/artistas/cadastrar">
+  Cadastrar Artista
+</a>
+
+
+
+<hr>
+
+<ul>
+
+  {{#each artistas}}
+
+    <li>
+      <a href="/artistas/{{this.id}}">{{this.nome}} - {{this.anoNascimento}} - {{this.nomeArtistico}}</a>
+
+      <a href="/artistas/{{this.id}}/editar"><i class="fa-solid fa-pen-to-square"></i></a>
+      
+      <form action="/artistas/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+        <button type="submit"><i class="fa-solid fa-trash-can"></i></button>
+      </form>
+    </li>
+
+  {{/each}}
+
+</ul>

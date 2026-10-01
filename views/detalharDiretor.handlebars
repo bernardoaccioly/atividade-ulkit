@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<a href="/">
+  Inicial
+</a><br>
+<a href="/diretores">
+  Diretores
+</a>
+
+<h1>Detalhar Diretor</h1>
+
+<hr>
+
+<ul>
+
+    <label>Nome:</label>
+    {{diretor.nome}} 
+    <br>
+
+    <label>Ano de Nascimento:</label>
+    {{diretor.anoNascimento}}
+    <br>
+
+    <label>Nacionalidade:</label>
+    {{diretor.nacionalidade}}
+    <br>
+    
+    <label>Filmes:</label>
+    {{#each diretor.filmes}}
+      <a href="/filmes/{{this.id}}"><li>{{this.nome}} ({{this.ano}})</li></a><br>
+    {{/each}}
+</ul>

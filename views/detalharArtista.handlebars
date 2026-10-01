@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<a href="/">
+  Inicial
+</a><br>
+<a href="/artistas">
+  Artistas
+</a>
+
+<h1>Detalhar Artista</h1>
+
+<hr>
+
+<ul>
+
+    <label>Nome:</label>
+    {{artista.nome}} 
+    <br>
+
+    <label>Ano de Nascimento:</label>
+    {{artista.anoNascimento}}
+    <br>
+
+    <label>Em atividade?</label>
+    {{#if artista.emAtividade}}
+      Sim
+    {{else}}
+      Não
+    {{/if}}
+    <br>
+
+    <img src="{{artista.foto}}" alt="Foto do artista" width="200">
+    <br>
+
+    <label>Nome Artístico:</label>
+    {{artista.nomeArtistico}}
+    <br>
+    
+    <label>Filmes:</label>
+    {{#each artista.filmes}}
+      <a href="/filmes/{{this.id}}"><li>{{this.nome}} ({{this.ano}})</li></a><br>
+    {{/each}}
+</ul>

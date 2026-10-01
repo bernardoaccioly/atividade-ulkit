@@ -1,0 +1,46 @@
+<h1>Editar Filme</h1>
+
+<form action="/filmes/{{filme.id}}?_method=PUT" method="POST">
+
+  <div>
+    <label>Nome do Filme:</label>
+    <input type="text" name="nome" value="{{filme.nome}}">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Ano:</label>
+    <input type="number" name="ano" value="{{filme.ano}}">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Diretor:</label>
+    <select name="diretorId">
+      {{#each diretores}}
+        <option value="{{this.id}}" {{#if (eq this.id @root.filme.diretorId)}}selected{{/if}}>
+          {{this.nome}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  <br>
+
+  <div>
+    <label>Artistas:</label>
+    <select name="artistas" multiple>
+      {{#each artistas}}
+        <option value="{{this.id}}" {{#if (eq this.id @root.filme.artistaId)}}selected{{/if}}>
+          {{this.nome}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  <button type="submit">
+    Editar
+  </button>
+</form>

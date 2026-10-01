@@ -1,0 +1,30 @@
+<h1>Editar Diretor</h1>
+
+<form action="/diretores/{{diretor.id}}?_method=PUT" method="POST">
+
+  <div>
+    <label>Nome do Diretor:</label>
+    <input type="text" name="nome" value="{{diretor.nome}}">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Ano de Nascimento:</label>
+    <input type="number" name="anoNascimento" value="{{diretor.anoNascimento}}">
+  </div>
+
+  <br>
+
+  <div>
+    <label>Nacionalidade:</label>
+    <input type="text" name="nacionalidade" value="{{diretor.nacionalidade}}">
+  </div>
+
+  <br>
+
+  <button type="submit">
+    Editar
+  </button>
+  
+</form>
