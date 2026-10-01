@@ -1,0 +1,72 @@
+<ul class="uk-breadcrumb">
+  <li><a href="/">Inicial</a></li>
+  <li><a href="/filmes">Filmes</a></li>
+  <li><span>{{filme.nome}}</span></li>
+</ul>
+
+<h1 class="uk-heading-small">Detalhar Filme</h1>
+
+<div class="uk-card uk-card-default uk-card-body">
+
+  <dl class="uk-description-list uk-description-list-divider">
+
+    <dt>Nome</dt>
+    <dd>{{filme.nome}}</dd>
+
+    <dt>Ano</dt>
+    <dd>{{filme.ano}}</dd>
+
+    <dt>Diretor</dt>
+    <dd>
+      <a href="/diretores/{{filme.diretor.id}}">
+        {{filme.diretor.nome}} - {{filme.diretor.anoNascimento}} - {{filme.diretor.nacionalidade}}
+      </a>
+    </dd>
+
+  </dl>
+
+  <ul uk-accordion="multiple: true">
+
+    <li class="uk-open">
+      <a class="uk-accordion-title" href="#">Artistas</a>
+      <div class="uk-accordion-content">
+        <ul class="uk-list uk-list-bullet">
+          {{#each filme.artistas}}
+            <li>
+              <a href="/artistas/{{this.id}}">{{this.nome}} - {{this.anoNascimento}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </li>
+
+    <li class="uk-open">
+      <a class="uk-accordion-title" href="#">Ficha Técnica</a>
+      <div class="uk-accordion-content">
+
+        {{#if filme.fichaTecnica}}
+
+          <ul class="uk-list uk-list-divider">
+            <li>Duração: {{filme.fichaTecnica.duracaoMinutos}} minutos</li>
+            <li>Orçamento: {{filme.fichaTecnica.orcamento}}</li>
+            <li>Bilheteria: {{filme.fichaTecnica.bilheteria}}</li>
+          </ul>
+
+        {{else}}
+
+          <div class="uk-alert uk-alert-warning" uk-alert>
+            <p>Este filme ainda não possui uma ficha técnica.</p>
+          </div>
+
+          <a class="uk-button uk-button-primary" href="/filmes/{{filme.id}}/ficha-tecnica/cadastrar">
+            Cadastrar ficha técnica
+          </a>
+
+        {{/if}}
+
+      </div>
+    </li>
+
+  </ul>
+
+</div>

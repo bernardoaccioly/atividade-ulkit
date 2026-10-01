@@ -1,0 +1,54 @@
+<ul class="uk-breadcrumb">
+  <li><a href="/">Inicial</a></li>
+  <li><a href="/artistas">Artistas</a></li>
+  <li><span>{{artista.nome}}</span></li>
+</ul>
+
+<h1 class="uk-heading-small">Detalhar Artista</h1>
+
+<div class="uk-card uk-card-default uk-card-body">
+
+  <div class="uk-grid-medium" uk-grid>
+
+    {{#if artista.foto}}
+      <div class="uk-width-auto@m">
+        <img class="uk-border-rounded" src="{{artista.foto}}" alt="Foto do artista" width="200">
+      </div>
+    {{/if}}
+
+    <div class="uk-width-expand@m">
+      <dl class="uk-description-list uk-description-list-divider">
+
+        <dt>Nome</dt>
+        <dd>{{artista.nome}}</dd>
+
+        <dt>Nome Artístico</dt>
+        <dd>{{artista.nomeArtistico}}</dd>
+
+        <dt>Ano de Nascimento</dt>
+        <dd>{{artista.anoNascimento}}</dd>
+
+        <dt>Em atividade?</dt>
+        <dd>
+          {{#if artista.emAtividade}}
+            <span class="uk-label uk-label-success">Sim</span>
+          {{else}}
+            <span class="uk-label uk-label-danger">Não</span>
+          {{/if}}
+        </dd>
+
+        <dt>Filmes</dt>
+        <dd>
+          <ul class="uk-list uk-list-bullet">
+            {{#each artista.filmes}}
+              <li><a href="/filmes/{{this.id}}">{{this.nome}} ({{this.ano}})</a></li>
+            {{/each}}
+          </ul>
+        </dd>
+
+      </dl>
+    </div>
+
+  </div>
+
+</div>

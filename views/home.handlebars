@@ -1,15 +1,29 @@
-<h1>{{titulo}}</h1>
+<div class="uk-text-center uk-margin-large-top">
+  <h1 class="uk-heading-medium">{{titulo}}</h1>
+  <p class="uk-text-lead">Bem-vindo ao sistema de filmes.</p>
+</div>
 
-<p>Bem-vindo ao sistema de filmes.</p>
+<div class="uk-child-width-1-3@m uk-grid-match uk-margin-large-top" uk-grid>
 
-<a href="/filmes">
-  Filmes
-</a><br>
+  <div>
+    <a class="uk-card uk-card-default uk-card-hover uk-card-body uk-link-reset uk-text-center" href="/filmes">
+      <span uk-icon="icon: video-camera; ratio: 3"></span>
+      <h3 class="uk-card-title uk-margin-small-top">Filmes</h3>
+    </a>
+  </div>
 
-<a href="/diretores">
-  Diretores
-</a><br>
+  <div>
+    <a class="uk-card uk-card-default uk-card-hover uk-card-body uk-link-reset uk-text-center" href="/diretores">
+      <span uk-icon="icon: user; ratio: 3"></span>
+      <h3 class="uk-card-title uk-margin-small-top">Diretores</h3>
+    </a>
+  </div>
 
-<a href="/artistas">
-  Artistas
-</a><br>
+  <div>
+    <a class="uk-card uk-card-default uk-card-hover uk-card-body uk-link-reset uk-text-center" href="/artistas">
+      <span uk-icon="icon: users; ratio: 3"></span>
+      <h3 class="uk-card-title uk-margin-small-top">Artistas</h3>
+    </a>
+  </div>
+
+</div>

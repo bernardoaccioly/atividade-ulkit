@@ -1,0 +1,29 @@
+<h1 class="uk-heading-small">Cadastrar Diretor</h1>
+
+<form class="uk-form-stacked uk-width-1-2@m" action="/diretores" method="POST">
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nome do Diretor:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nome">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Ano de Nascimento:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="number" name="anoNascimento">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nacionalidade:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nacionalidade">
+    </div>
+  </div>
+
+  <button class="uk-button uk-button-primary" type="submit">Cadastrar</button>
+  <a class="uk-button uk-button-default" href="/diretores">Cancelar</a>
+
+</form>

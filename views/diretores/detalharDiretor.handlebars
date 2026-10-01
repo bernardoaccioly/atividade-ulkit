@@ -1,0 +1,33 @@
+<ul class="uk-breadcrumb">
+  <li><a href="/">Inicial</a></li>
+  <li><a href="/diretores">Diretores</a></li>
+  <li><span>{{diretor.nome}}</span></li>
+</ul>
+
+<h1 class="uk-heading-small">Detalhar Diretor</h1>
+
+<div class="uk-card uk-card-default uk-card-body">
+
+  <dl class="uk-description-list uk-description-list-divider">
+
+    <dt>Nome</dt>
+    <dd>{{diretor.nome}}</dd>
+
+    <dt>Ano de Nascimento</dt>
+    <dd>{{diretor.anoNascimento}}</dd>
+
+    <dt>Nacionalidade</dt>
+    <dd>{{diretor.nacionalidade}}</dd>
+
+    <dt>Filmes</dt>
+    <dd>
+      <ul class="uk-list uk-list-bullet">
+        {{#each diretor.filmes}}
+          <li><a href="/filmes/{{this.id}}">{{this.nome}} ({{this.ano}})</a></li>
+        {{/each}}
+      </ul>
+    </dd>
+
+  </dl>
+
+</div>

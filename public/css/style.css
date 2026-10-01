@@ -1,0 +1,321 @@
+/* =========================================================
+   Sistema de Filmes - estilos personalizados sobre o UIkit
+   ========================================================= */
+
+/* ---------- Variáveis ---------- */
+:root {
+  --cor-fundo: #f4f5f9;
+  --cor-escura: #1f2233;
+  --cor-escura-hover: #2b2f47;
+  --cor-destaque: #f5a623;
+  --cor-destaque-escura: #d98c0c;
+  --cor-texto: #2d3047;
+  --cor-texto-suave: #6b6f85;
+  --cor-borda: #e3e5ee;
+  --raio: 10px;
+  --sombra: 0 2px 10px rgba(31, 34, 51, 0.08);
+  --sombra-forte: 0 8px 24px rgba(31, 34, 51, 0.16);
+}
+
+/* ---------- Base ---------- */
+html {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+body {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  min-height: 100vh;
+}
+
+h1, h2, h3, .uk-heading-small, .uk-heading-medium, .uk-card-title {
+  color: var(--cor-escura);
+  font-weight: 700;
+}
+
+a {
+  color: var(--cor-destaque-escura);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--cor-escura);
+  text-decoration: none;
+}
+
+hr {
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* ---------- Navbar ---------- */
+.uk-navbar-container:not(.uk-navbar-transparent) {
+  background: var(--cor-escura);
+  border-bottom: 3px solid var(--cor-destaque);
+}
+
+.uk-navbar-container .uk-logo,
+.uk-navbar-container .uk-logo:hover {
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.uk-navbar-container .uk-logo [uk-icon] {
+  color: var(--cor-destaque);
+}
+
+.uk-navbar-nav > li > a {
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  text-transform: none;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.uk-navbar-nav > li:hover > a,
+.uk-navbar-nav > li > a:focus {
+  color: var(--cor-destaque);
+  background: var(--cor-escura-hover);
+}
+
+/* ---------- Breadcrumb ---------- */
+.uk-breadcrumb > * > * {
+  color: var(--cor-texto-suave);
+}
+
+.uk-breadcrumb > :last-child > * {
+  color: var(--cor-escura);
+  font-weight: 600;
+}
+
+/* ---------- Cards ---------- */
+.uk-card {
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  border: 1px solid var(--cor-borda);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.uk-card-default {
+  background: #fff;
+}
+
+.uk-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-forte);
+}
+
+.uk-card-hover [uk-icon] {
+  color: var(--cor-destaque);
+}
+
+/* Cards de detalhe um pouco separados entre si */
+.uk-card + .uk-card {
+  margin-top: 24px;
+}
+
+/* ---------- Tabelas ---------- */
+.uk-table {
+  background: #fff;
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra);
+}
+
+.uk-table thead th {
+  background: var(--cor-escura);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 14px 16px;
+}
+
+.uk-table td {
+  padding: 14px 16px;
+}
+
+.uk-table-hover tbody tr:hover {
+  background: #fff7e8;
+}
+
+.uk-table a:not([uk-icon]) {
+  font-weight: 600;
+}
+
+/* ---------- Botões e ícones de ação ---------- */
+.uk-button {
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: none;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.uk-button:active {
+  transform: scale(0.97);
+}
+
+.uk-button-primary {
+  background: var(--cor-destaque);
+  color: var(--cor-escura);
+}
+
+.uk-button-primary:hover,
+.uk-button-primary:focus {
+  background: var(--cor-destaque-escura);
+  color: #fff;
+}
+
+.uk-button-default {
+  border-color: var(--cor-borda);
+  color: var(--cor-texto);
+  background: #fff;
+}
+
+.uk-button-default:hover {
+  background: var(--cor-escura);
+  border-color: var(--cor-escura);
+  color: #fff;
+}
+
+.uk-icon-button {
+  background: #eef0f6;
+  color: var(--cor-texto);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.uk-icon-button:hover {
+  background: var(--cor-escura);
+  color: #fff;
+}
+
+.uk-icon-button.uk-button-danger {
+  background: #fdeaea;
+  color: #d0342c;
+}
+
+.uk-icon-button.uk-button-danger:hover {
+  background: #d0342c;
+  color: #fff;
+}
+
+/* ---------- Formulários ---------- */
+.uk-form-stacked {
+  background: #fff;
+  padding: 28px;
+  border-radius: var(--raio);
+  border: 1px solid var(--cor-borda);
+  box-shadow: var(--sombra);
+}
+
+.uk-form-label {
+  color: var(--cor-escura);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.uk-input,
+.uk-select,
+.uk-textarea {
+  border-radius: 8px;
+  border: 1px solid var(--cor-borda);
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.uk-input:focus,
+.uk-select:focus,
+.uk-textarea:focus {
+  border-color: var(--cor-destaque);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+  background: #fff;
+}
+
+.uk-checkbox:checked,
+.uk-checkbox:indeterminate {
+  background-color: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+
+/* ---------- Lista de descrição (páginas de detalhe) ---------- */
+.uk-description-list > dt {
+  color: var(--cor-texto-suave);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.uk-description-list > dd {
+  color: var(--cor-escura);
+  font-size: 1.05rem;
+}
+
+/* ---------- Accordion ---------- */
+.uk-accordion > li {
+  border-top: 1px solid var(--cor-borda);
+  padding-top: 14px;
+}
+
+.uk-accordion-title {
+  color: var(--cor-escura);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.uk-accordion-title:hover {
+  color: var(--cor-destaque-escura);
+}
+
+.uk-accordion-title::before {
+  /* troca o ícone padrão por uma cor de destaque */
+  filter: none;
+  opacity: 0.8;
+}
+
+/* ---------- Alertas e labels ---------- */
+.uk-alert {
+  border-radius: var(--raio);
+  border: 1px solid var(--cor-borda);
+}
+
+.uk-alert-primary {
+  background: #eef2ff;
+  color: #3a4a9f;
+  border-color: #d5dcff;
+}
+
+.uk-alert-warning {
+  background: #fff6e0;
+  color: #8a5a00;
+  border-color: #ffe4a3;
+}
+
+.uk-label {
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-weight: 600;
+}
+
+/* ---------- Imagens ---------- */
+img.uk-border-rounded {
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  object-fit: cover;
+}
+
+/* ---------- Listas ---------- */
+.uk-list-bullet > ::before {
+  filter: none;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 640px) {
+  .uk-form-stacked {
+    padding: 18px;
+  }
+
+  .uk-table thead th,
+  .uk-table td {
+    padding: 10px 8px;
+  }
+}

@@ -1,0 +1,54 @@
+<h1 class="uk-heading-small">Editar Artista</h1>
+
+<form class="uk-form-stacked uk-width-1-2@m" action="/artistas/{{artista.id}}?_method=PUT" method="POST">
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nome do Artista:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nome" value="{{artista.nome}}">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Ano de Nascimento:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="number" name="anoNascimento" value="{{artista.anoNascimento}}">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nome artístico:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nomeArtistico" value="{{artista.nomeArtistico}}">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label><input class="uk-checkbox" type="checkbox" name="emAtividade" {{#if artista.emAtividade}}checked{{/if}}> Em
+      atividade?</label>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Foto:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="foto" value="{{artista.foto}}">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Filmes:</label>
+    <div class="uk-form-controls">
+      <select class="uk-select" name="filmes" multiple size="5">
+        {{#each filmes}}
+        <option value="{{this.id}}" {{#if this.selecionado}}selected{{/if}}>
+          {{this.nome}}
+        </option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <button class="uk-button uk-button-primary" type="submit">Editar</button>
+  <a class="uk-button uk-button-default" href="/artistas">Cancelar</a>
+
+</form>

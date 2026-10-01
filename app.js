@@ -1,4 +1,6 @@
 const express = require('express');
+const path = require('path');
+
 const exphbs = require('express-handlebars');
 const sequelize = require('./config/bd');
 const Filme = require('./models/filme.model');
@@ -12,14 +14,14 @@ require('./models/relacionamentosModels');
 const app = express();
 
 app.use(methodOverride('_method'));
-
+app.use(express.static(path.join(__dirname, 'public')));
 // Middleware para formulário
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Configurando Handlebars
 app.engine('handlebars', exphbs.engine({
-  defaultLayout: false,
+  defaultLayout: "main",
   helpers: {
       eq: function (v1, v2) {
         return v1 == v2; 
@@ -38,10 +40,12 @@ app.get('/', (req, res) => {
 
 });
 
+// ===================== FILMES =====================
+
 // Rota GET - Listar filmes
 app.get('/filmes', async (req, res) => {
   const filmes = await Filme.findAll({raw: true});
-  res.render('filmes', { filmes });
+  res.render('filmes/filmes', { filmes });
 });
 
 // Rota GET - Formulário de cadastro
@@ -50,7 +54,7 @@ app.get(
   async (req, res) => {
     const diretores = await Diretor.findAll({raw: true});
     const artistas = await Artista.findAll({raw: true});
-    res.render('cadastrarFilme', { diretores, artistas });
+    res.render('filmes/cadastrarFilme', { diretores, artistas });
   }
 );
 
@@ -78,10 +82,19 @@ app.get(
   '/filmes/:id/editar', 
   async (req, res) => {
     const id = req.params.id;
-    const filme = await Filme.findByPk(id, {raw: true});
+    const filme = await Filme.findByPk(id, {
+      include: [{ model: Artista, as: 'artistas' }]
+    });
     const diretores = await Diretor.findAll({raw: true});
-    const artistas = await Artista.findAll({raw: true});
-    res.render('editarFilme', { filme, diretores, artistas });
+
+    // Marca quais artistas já estão associados ao filme
+    const idsSelecionados = filme.artistas.map(a => a.id);
+    const artistas = (await Artista.findAll({raw: true})).map(a => ({
+      ...a,
+      selecionado: idsSelecionados.includes(a.id)
+    }));
+
+    res.render('filmes/editarFilme', { filme: filme.toJSON(), diretores, artistas });
   }
 );
 
@@ -123,7 +136,7 @@ app.get('/filmes/:id/ficha-tecnica/cadastrar', async (req, res) => {
 
   const filme = await Filme.findByPk(id, { raw: true });
 
-  res.render('cadastrarFichaTecnica', { filme });
+  res.render('filmes/cadastrarFichaTecnica', { filme });
 });
 
 app.post('/filmes/:id/ficha-tecnica', async (req, res) => {
@@ -152,23 +165,25 @@ app.get('/filmes/:id', async (req, res) => {
   });
 
   console.log('ESTOU NA ROTA DE DETALHE DO FILME');
-console.log(filme.toJSON());
+  console.log(filme.toJSON());
 
-  res.render('detalharFilme', {
+  res.render('filmes/detalharFilme', {
     filme: filme.toJSON()
   });
 });
 
+// ===================== DIRETORES =====================
+
 // Rota GET - Listar diretores
 app.get('/diretores', async (req, res) => {
   const diretores = await Diretor.findAll({raw: true});
-  res.render('diretores', { diretores });
+  res.render('diretores/diretores', { diretores });
 });
 
 // Rota GET - Formulário de cadastro
 app.get(
   '/diretores/cadastrar', 
-  (req, res) => res.render('cadastrarDiretor')
+  (req, res) => res.render('diretores/cadastrarDiretor')
 );
 
 // Rota POST - Cadastrar diretor
@@ -192,7 +207,7 @@ app.get(
   async (req, res) => {
     const id = req.params.id;
     const diretor = await Diretor.findByPk(id, {raw: true});
-    res.render('editarDiretor', { diretor });
+    res.render('diretores/editarDiretor', { diretor });
   }
 );
 
@@ -228,14 +243,15 @@ app.delete(
 app.get('/diretores/:id', async (req, res) => {
   const id = req.params.id;
   const diretor = await Diretor.findByPk(id, { include: [{ model: Filme, as: 'filmes' }] });
-  res.render('detalharDiretor', { diretor: diretor.toJSON() });
+  res.render('diretores/detalharDiretor', { diretor: diretor.toJSON() });
 });
 
+// ===================== ARTISTAS =====================
 
 // Rota GET - Listar artistas
 app.get('/artistas', async (req, res) => {
   const artistas = await Artista.findAll({raw: true});
-  res.render('artistas', { artistas });
+  res.render('artistas/artistas', { artistas });
 });
 
 // Rota GET - Formulário de cadastro
@@ -243,11 +259,11 @@ app.get(
   '/artistas/cadastrar', 
   async (req, res) => {
     const filmes = await Filme.findAll({raw:true});
-    res.render('cadastrarArtista', { filmes });
+    res.render('artistas/cadastrarArtista', { filmes });
   }
 );
 
-// Rota POST - Cadastrar artist
+// Rota POST - Cadastrar artista
 app.post('/artistas', async (req, res) => {
 
   const nome = req.body.nome;
@@ -257,7 +273,7 @@ app.post('/artistas', async (req, res) => {
   const foto = req.body.foto;
   const filmes = req.body.filmes;
 
-  const artista =await Artista.create({
+  const artista = await Artista.create({
     nome: nome,
     anoNascimento: anoNascimento,
     nomeArtistico: nomeArtistico,
@@ -265,7 +281,7 @@ app.post('/artistas', async (req, res) => {
     foto: foto
   });
 
-  if (filmes && filmes.length >0)
+  if (filmes && filmes.length > 0)
     await artista.setFilmes(filmes);
 
   res.redirect('/artistas');
@@ -275,9 +291,18 @@ app.get(
   '/artistas/:id/editar', 
   async (req, res) => {
     const id = req.params.id;
-    const artista = await Artista.findByPk(id, {raw: true});
-    const filmes = await Filme.findAll({raw:true});
-    res.render('editarArtista', { artista, filmes });
+    const artista = await Artista.findByPk(id, {
+      include: [{ model: Filme, as: 'filmes' }]
+    });
+
+    // Marca quais filmes já estão associados ao artista
+    const idsSelecionados = artista.filmes.map(f => f.id);
+    const filmes = (await Filme.findAll({raw:true})).map(f => ({
+      ...f,
+      selecionado: idsSelecionados.includes(f.id)
+    }));
+
+    res.render('artistas/editarArtista', { artista: artista.toJSON(), filmes });
   }
 );
 
@@ -301,7 +326,7 @@ app.put(
     artista.foto = foto;
     await artista.save();
 
-    if (filmes && filmes.length>0)
+    if (filmes && filmes.length > 0)
       await artista.setFilmes(filmes);
 
     res.redirect('/artistas');
@@ -321,8 +346,10 @@ app.delete(
 app.get('/artistas/:id', async (req, res) => {
   const id = req.params.id;
   const artista = await Artista.findByPk(id, { include: [{ model: Filme, as: 'filmes' }] });
-  res.render('detalharArtista', { artista: artista.toJSON() });
+  res.render('artistas/detalharArtista', { artista: artista.toJSON() });
 });
+
+// ===================== BANCO / SERVIDOR =====================
 
 async function conectarBD() {
   try {

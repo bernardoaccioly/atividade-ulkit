@@ -1,0 +1,51 @@
+<h1 class="uk-heading-small">Cadastrar Artista</h1>
+
+<form class="uk-form-stacked uk-width-1-2@m" action="/artistas" method="POST">
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nome do Artista:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nome">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Ano de Nascimento:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="number" name="anoNascimento">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Nome artístico:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="nomeArtistico">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label><input class="uk-checkbox" type="checkbox" name="emAtividade"> Em atividade?</label>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Foto:</label>
+    <div class="uk-form-controls">
+      <input class="uk-input" type="text" name="foto" placeholder="URL da foto">
+    </div>
+  </div>
+
+  <div class="uk-margin">
+    <label class="uk-form-label">Filmes:</label>
+    <div class="uk-form-controls">
+      <select class="uk-select" name="filmes" multiple size="5">
+        {{#each filmes}}
+          <option value="{{this.id}}">{{this.nome}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <button class="uk-button uk-button-primary" type="submit">Cadastrar</button>
+  <a class="uk-button uk-button-default" href="/artistas">Cancelar</a>
+
+</form>

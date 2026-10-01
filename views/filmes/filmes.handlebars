@@ -1,0 +1,42 @@
+<div class="uk-flex uk-flex-between uk-flex-middle">
+  <h1 class="uk-heading-small uk-margin-remove">Lista de Filmes</h1>
+  <a class="uk-button uk-button-primary" href="/filmes/cadastrar">
+    <span uk-icon="plus"></span> Cadastrar Filme
+  </a>
+</div>
+
+<hr>
+
+{{#if filmes.length}}
+
+  <table class="uk-table uk-table-divider uk-table-hover uk-table-middle">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Ano</th>
+        <th class="uk-table-shrink">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each filmes}}
+        <tr>
+          <td><a href="/filmes/{{this.id}}">{{this.nome}}</a></td>
+          <td>{{this.ano}}</td>
+          <td class="uk-text-nowrap">
+            <a class="uk-icon-button uk-margin-small-right" href="/filmes/{{this.id}}/editar" uk-icon="pencil" title="Editar"></a>
+            <form action="/filmes/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
+              <button class="uk-icon-button uk-button-danger" type="submit" uk-icon="trash" title="Excluir"></button>
+            </form>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+{{else}}
+
+  <div class="uk-alert uk-alert-primary" uk-alert>
+    <p>Nenhum filme cadastrado.</p>
+  </div>
+
+{{/if}}
